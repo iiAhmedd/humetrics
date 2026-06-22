@@ -172,7 +172,19 @@ cd humetrics
 ```bash
 cd backend
 npm install
-# Start the backend server (typically runs on port 3000 or 5000)
+```
+
+Create a `.env` file in the `backend` directory with your MongoDB Atlas connection string and JWT secrets:
+```env
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbname>?retryWrites=true&w=majority
+DB_NAME=hr_analytics
+JWT_SECRET=your_super_secret_key
+JWT_EXPIRES_IN=8h
+PORT=8000
+```
+
+```bash
+# Start the backend server
 npm run start
 ```
 
