@@ -7,6 +7,8 @@ import { fileURLToPath } from 'url';
 import { parse } from 'csv-parse';
 import { Readable } from 'stream';
 
+import { getDb } from '../db.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '../../../data/raw');
 
@@ -58,7 +60,6 @@ async function loadMain() {
 
     // Try reading from MongoDB first
     try {
-        const { getDb } = await import('../db.js');
         const db = getDb();
         const dbRows = await db.collection('employees').find({}).project({_id: 0}).toArray();
         if (dbRows && dbRows.length > 0) {
@@ -116,7 +117,6 @@ async function loadIbm() {
 
     // Try reading from MongoDB first
     try {
-        const { getDb } = await import('../db.js');
         const db = getDb();
         const dbRows = await db.collection('ibm_attrition').find({}).project({_id: 0}).toArray();
         if (dbRows && dbRows.length > 0) {
@@ -325,7 +325,6 @@ export async function replaceMainDataset(rows) {
 
     // Also update MongoDB
     try {
-        const { getDb } = await import('../db.js');
         const db = getDb();
         await db.collection('employees').deleteMany({});
         if (processed.length > 0) {
