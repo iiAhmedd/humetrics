@@ -93,7 +93,7 @@ humetrics/
 **Machine Learning & Data Science**
 *   **Language:** Python 3
 *   **Environment:** Jupyter Notebooks
-*   **Libraries:** Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn
+*   **Libraries:** Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, SHAP
 
 ---
 
@@ -102,7 +102,7 @@ humetrics/
 The `/notebooks` directory houses the core intelligence of Humetrics. Each notebook handles a specific predictive or analytical HR task:
 
 *   📈 **`promotion.ipynb`**: Analyzes performance ratings, tenure, and training history to identify high-potential employees ready for leadership roles.
-*   🚪 **`attrition_drivers.ipynb`**: Predicts churn probabilities and isolates the primary factors (e.g., pay stagnation, commute, manager relationship) driving turnover.
+*   🚪 **`attrition_drivers.ipynb`**: Predicts churn probabilities and uses Explainable AI (XAI) with SHAP to isolate and explain the primary factors (e.g., pay stagnation, commute, manager relationship) driving turnover.
 *   ⚠️ **`behavioral_risk.ipynb`**: Evaluates behavioral metadata and engagement metrics to flag burnout risk or disengagement patterns.
 *   💵 **`pay_equity.ipynb`**: Runs statistical modeling across demographic groups to ensure compliance and fairness in compensation.
 *   🌟 **`performance_prediction.ipynb`**: Forecasts future employee performance based on historical trends, engagement scores, and project success rates.
