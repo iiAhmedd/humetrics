@@ -26,6 +26,25 @@ app.use(cors({
 // ── Body parsing ──────────────────────────────────────────────────
 app.use(express.json());
 
+// ── Serverless Initialization Middleware ──────────────────────────
+let isReady = false;
+app.use(async (req, res, next) => {
+    if (!isReady) {
+        try {
+            await connect();
+            console.log('[OK] Connected to MongoDB');
+            await seedUsers();
+            await preload();
+            console.log('[OK] Data preloaded');
+            isReady = true;
+        } catch (err) {
+            console.error('[FAIL] Initialization error:', err);
+            return res.status(500).json({ detail: 'Backend initialization failed' });
+        }
+    }
+    next();
+});
+
 // ── Routes ────────────────────────────────────────────────────────
 app.use('/api/auth', authRouter);
 app.use('/api/dashboard', dashboardRouter);
@@ -46,29 +65,5 @@ app.use((err, req, res, next) => {
     res.status(500).json({ detail: err.message || 'Internal server error' });
 });
 
-// ── Startup ───────────────────────────────────────────────────────
-async function start() {
-    try {
-        // Connect to MongoDB and seed users
-        await connect();
-        console.log('[OK] Connected to MongoDB Atlas');
-        await seedUsers();
-        console.log('[OK] Users seeded');
-
-        // Preload CSV datasets into memory
-        await preload();
-
-        app.listen(PORT, () => {
-            console.log(`[OK] HR Analytics API listening on http://localhost:${PORT}`);
-        });
-    } catch (err) {
-        console.error('[FAIL] Startup error:', err);
-        process.exit(1);
-    }
-}
-
-// Graceful shutdown
-process.on('SIGINT', () => { getClient()?.close(); process.exit(0); });
-process.on('SIGTERM', () => { getClient()?.close(); process.exit(0); });
-
-start();
+// ── Serverless Export ─────────────────────────────────────────────
+export default app;
