@@ -29,7 +29,7 @@ function loadCsv(filepath) {
     return new Promise((ok, fail) => {
         const rows = [];
         createReadStream(filepath)
-            .pipe(parse({ columns: true, skip_empty_lines: true, trim: true }))
+            .pipe(parse({ columns: true, skip_empty_lines: true, trim: true, bom: true }))
             .on('data', row => rows.push(row))
             .on('end', () => ok(rows))
             .on('error', fail);
