@@ -37,15 +37,15 @@ graph TD
     end
 
     subgraph Server [Backend Architecture]
-        Frontend <-->|REST API (JSON)| API[Node.js + Express API]
-        API <-->|Auth & RBAC| AuthMiddleware[Authentication Service]
-        API <-->|Read / Write| Database[(Core HR Database)]
+        Frontend -->|REST API| API[Node.js + Express API]
+        API -->|Auth & RBAC| AuthMiddleware[Authentication Service]
+        API -->|Read / Write| Database[(Core HR Database)]
     end
 
     subgraph Intelligence [Machine Learning Layer]
         Notebooks[Jupyter Notebooks] -->|Train & Generate Insights| Models((Scikit-Learn Models))
         Models -.->|Export Metrics/Predictions| Database
-        Notebooks <-->|Fetch Raw Data| RawData[(Raw HR Data files)]
+        Notebooks -->|Fetch Raw Data| RawData[(Raw HR Data files)]
     end
 ```
 
