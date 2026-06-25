@@ -88,6 +88,7 @@ humetrics/
 **Backend**
 *   **Runtime:** Node.js
 *   **Framework:** Express.js
+*   **Database:** MongoDB
 *   **Security:** JSON Web Tokens (JWT), bcrypt
 
 **Machine Learning & Data Science**
@@ -113,12 +114,12 @@ The `/notebooks` directory houses the core intelligence of Humetrics. Each noteb
 
 ## 🗄️ Database Design
 
-The system relies on a relational data model to ensure data integrity and complex querying for analytics. Key entities include:
+The system relies on MongoDB, a NoSQL document database, to ensure flexible and scalable data storage for analytics. Key entities include:
 
 *   **Users & Roles**: Manages authentication credentials and RBAC mapping.
 *   **Employee Records**: Core HR data containing demographics, salaries, performance ratings, and tenure.
 *   **Departments & Roles**: Organizational hierarchy and job classifications.
-*   **Machine Learning Outputs**: Tables storing cached predictions (e.g., Burnout Risk Scores, Promotion Readiness) injected by the Jupyter notebooks.
+*   **Machine Learning Outputs**: Collections storing cached predictions (e.g., Burnout Risk Scores, Promotion Readiness) injected by the Jupyter notebooks.
 *   **System Logs & Alerts**: Audit trails and automatically generated risk alerts for managers.
 
 ---
