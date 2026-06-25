@@ -102,7 +102,7 @@ humetrics/
 
 The `/notebooks` directory houses the core intelligence of Humetrics. Each notebook handles a specific predictive or analytical HR task:
 
-*   📈 **`promotion.ipynb`**: Analyzes performance ratings, tenure, and training history to identify high-potential employees ready for leadership roles.
+*   📈 **`Promotion.ipynb`**: Analyzes performance ratings, tenure, and training history to identify high-potential employees ready for leadership roles.
 *   🚪 **`attrition_drivers.ipynb`**: Predicts churn probabilities and uses Explainable AI (XAI) with SHAP to isolate and explain the primary factors (e.g., pay stagnation, commute, manager relationship) driving turnover.
 *   ⚠️ **`behavioral_risk.ipynb`**: Evaluates behavioral metadata and engagement metrics to flag burnout risk or disengagement patterns.
 *   💵 **`pay_equity.ipynb`**: Runs statistical modeling across demographic groups to ensure compliance and fairness in compensation.
@@ -132,7 +132,7 @@ The Node.js backend exposes a RESTful API to serve the frontend. Standardized JS
 *   `POST /api/auth/login`: Authenticate users and return a JWT.
 *   `GET /api/dashboard/overview`: Fetch high-level KPIs (Total Employees, Average Salary, Turnover Rate).
 *   `GET /api/employees`: Retrieve a paginated list of employees with sorting and filtering.
-*   `GET /api/predictions/risk`: Fetch the machine learning risk profiles for active employees.
+*   `GET /api/predictions/behavioral-risk`: Fetch the machine learning risk profiles for active employees.
 *   `POST /api/upload`: Endpoint for HR to securely upload new batches of HR data CSVs.
 
 *(A fully interactive Swagger/OpenAPI documentation will be available at `/api-docs` when running the backend in development mode).*
