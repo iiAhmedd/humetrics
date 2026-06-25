@@ -164,7 +164,7 @@ Follow these steps to set up Humetrics locally on your machine.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/humetrics.git
+git clone https://github.com/iiAhmedd/humetrics.git
 cd humetrics
 ```
 
