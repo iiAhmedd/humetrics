@@ -6,6 +6,7 @@ import { Search, X, User, Briefcase, TrendingUp, Clock, BookOpen, DollarSign, Al
 
 import { EmployeeDetailPanel } from '../components/EmployeeDetailPanel';
 import { useCurrency } from '../context/CurrencyContext';
+import { useAuth } from '../context/AuthContext';
 
 /* ── Main Page ────────────────────────────────────────────────────── */
 
@@ -17,6 +18,7 @@ export default function Employees() {
     const [loading, setLoading] = useState(true);
     const [selected, setSelected] = useState(null);
     const { formatCurrencyShorthand } = useCurrency();
+    const { user } = useAuth();
 
     useEffect(() => {
         API.get('/employees/departments').then((r) => setDepartments(r.data));
@@ -53,16 +55,18 @@ export default function Employees() {
                         className="pl-9 bg-paper rounded-none border-rule focus-visible:ring-0 focus-visible:border-primary font-mono text-sm"
                     />
                 </div>
-                <div className="w-full md:w-64">
-                    <select 
-                        value={dept} 
-                        onChange={(e) => setDept(e.target.value)} 
-                        className="flex h-10 w-full bg-paper px-3 py-2 text-sm border border-rule rounded-none focus:outline-none focus:border-primary font-mono"
-                    >
-                        <option value="">All Departments</option>
-                        {departments.map((d) => <option key={d} value={d}>{d}</option>)}
-                    </select>
-                </div>
+                {user?.role !== 'manager' && (
+                    <div className="w-full md:w-64">
+                        <select 
+                            value={dept} 
+                            onChange={(e) => setDept(e.target.value)} 
+                            className="flex h-10 w-full bg-paper px-3 py-2 text-sm border border-rule rounded-none focus:outline-none focus:border-primary font-mono"
+                        >
+                            <option value="">All Departments</option>
+                            {departments.map((d) => <option key={d} value={d}>{d}</option>)}
+                        </select>
+                    </div>
+                )}
             </section>
 
             {/* Employee detail slide-over */}

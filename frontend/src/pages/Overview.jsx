@@ -166,7 +166,7 @@ export default function Overview() {
                 key={idx}
                 className="grid grid-cols-[auto_1fr] items-start gap-4 py-4"
               >
-                <span className={`p-2 rounded-sm ${a.severity === 'high' ? 'bg-destructive/10 text-destructive' : 'bg-warning/10 text-warning-foreground'}`}>
+                <span className={`p-2 rounded-sm ${a.severity === 'high' ? 'bg-destructive/10 text-destructive' : 'bg-warning/10 text-warning'}`}>
                   <AlertTriangle className="h-4 w-4" />
                 </span>
                 <div className="min-w-0">
@@ -208,7 +208,7 @@ export default function Overview() {
                 const attrPct = (d.attrition_rate * 100).toFixed(1);
                 let badgeStyle = "bg-success/10 text-success border-success/30";
                 if (d.attrition_rate > 0.15) badgeStyle = "bg-destructive/10 text-destructive border-destructive/30";
-                else if (d.attrition_rate > 0.10) badgeStyle = "bg-warning/10 text-warning-foreground border-warning/30";
+                else if (d.attrition_rate > 0.10) badgeStyle = "bg-warning/10 text-warning border-warning/30";
 
                 return (
                   <tr key={d.Department} className="hover:bg-accent/20 transition-colors">

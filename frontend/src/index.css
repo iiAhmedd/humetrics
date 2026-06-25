@@ -141,6 +141,10 @@
   --accent-foreground: oklch(0.95 0.012 80);
   --destructive: oklch(0.68 0.2 28);
   --destructive-foreground: oklch(0.15 0.012 55);
+  --success: oklch(0.68 0.15 155);
+  --success-foreground: oklch(0.15 0.012 55);
+  --warning: oklch(0.78 0.16 70);
+  --warning-foreground: oklch(0.15 0.012 55);
   --border: oklch(0.28 0.018 60);
   --input: oklch(0.28 0.018 60);
   --ring: oklch(0.7 0.2 35);

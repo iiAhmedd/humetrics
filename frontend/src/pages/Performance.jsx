@@ -265,7 +265,7 @@ function PredictedPerformanceTab() {
                                     <td className="py-3 px-4 font-numeric tabular-nums text-right text-ink">{d.AvgPredicted?.toFixed(2)}</td>
                                     <td className="py-3 px-4 font-numeric tabular-nums text-center text-destructive font-medium">{d.AtRisk}</td>
                                     <td className="py-3 px-4">
-                                        <span className={`font-numeric text-[10px] px-2 py-0.5 border rounded-sm ${d.AtRiskPct > 30 ? 'bg-destructive/10 text-destructive border-destructive/30' : d.AtRiskPct > 15 ? 'bg-warning/10 text-warning-foreground border-warning/30' : 'bg-success/10 text-success border-success/30'}`}>
+                                        <span className={`font-numeric text-[10px] px-2 py-0.5 border rounded-sm ${d.AtRiskPct > 30 ? 'bg-destructive/10 text-destructive border-destructive/30' : d.AtRiskPct > 15 ? 'bg-warning/10 text-warning border-warning/30' : 'bg-success/10 text-success border-success/30'}`}>
                                             {d.AtRiskPct}%
                                         </span>
                                     </td>

@@ -157,8 +157,13 @@ export async function getMainDf(department = null) {
 export async function getIbmDf(department = null) {
     let rows = await loadIbm();
     if (department) {
-        // Fallback in case IBM dataset doesn't have exact same 'Department' casing
-        rows = rows.filter(r => r['Department'] === department);
+        // Fallback in case IBM dataset doesn't have exact same 'Department' casing or doesn't have the department
+        const filtered = rows.filter(r => r['Department']?.toLowerCase() === department.toLowerCase());
+        if (filtered.length > 0) {
+            rows = filtered;
+        } else {
+            console.warn(`[WARN] Department ${department} not found in IBM dataset. Using full dataset.`);
+        }
     }
     return [...rows];
 }

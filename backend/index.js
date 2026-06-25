@@ -28,16 +28,24 @@ app.use(express.json());
 
 // ── Serverless Initialization Middleware ──────────────────────────
 let isReady = false;
+let initPromise = null;
+
 app.use(async (req, res, next) => {
     if (!isReady) {
+        if (!initPromise) {
+            initPromise = (async () => {
+                await connect();
+                console.log('[OK] Connected to MongoDB');
+                await seedUsers();
+                await preload();
+                console.log('[OK] Data preloaded');
+                isReady = true;
+            })();
+        }
         try {
-            await connect();
-            console.log('[OK] Connected to MongoDB');
-            await seedUsers();
-            await preload();
-            console.log('[OK] Data preloaded');
-            isReady = true;
+            await initPromise;
         } catch (err) {
+            initPromise = null; // allow retry
             console.error('[FAIL] Initialization error:', err);
             return res.status(500).json({ detail: 'Backend initialization failed' });
         }
@@ -67,3 +75,10 @@ app.use((err, req, res, next) => {
 
 // ── Serverless Export ─────────────────────────────────────────────
 export default app;
+
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+    const PORT = process.env.PORT || 8000;
+    app.listen(PORT, () => {
+        console.log(`[OK] Local Dev Server listening on http://localhost:${PORT}`);
+    });
+}
